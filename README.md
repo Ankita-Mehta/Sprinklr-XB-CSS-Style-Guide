@@ -302,7 +302,7 @@ Please do not abbreviate words like ```icon``` to ```icn```. Use abbreviation on
     >.page-container {
     >    .content {
     >        .profile {
-    >          // STOP!
+    >          /* STOP! */
     >        }
     >    }
     >}
@@ -334,7 +334,7 @@ Placeholders are powerful but easy to abuse, especially when combined with neste
 *Sass*
 
 ```sass
-// Unless we call `@extend %icon` these properties won't be compiled!
+/* Unless we call `@extend %icon` these properties won't be compiled! */
 %icon {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
