@@ -84,7 +84,7 @@ menu--hidden
 
 ```css
 .menu--hidden { 
-    @include .hidden; /* Using Bootstrap */  
+    @include hidden; /* Using Bootstrap */  
 }
 ```
 
