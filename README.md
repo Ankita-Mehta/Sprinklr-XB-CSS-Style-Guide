@@ -121,7 +121,7 @@ By reading some HTML with some classes in, you can see how – if at all – the
 Taking the previous .site-search example again, with ‘regular’ naming:
 
 ```html
-<form class="site-search  full">
+<form class="site-search full">
     <input type="text" class="field">
     <input type="Submit" value ="Search" class="button">
 </form>
@@ -130,7 +130,7 @@ Taking the previous .site-search example again, with ‘regular’ naming:
 These classes are fairly loose, and don’t tell us much. Even though we can work it out, they’re very inexplicit. With BEM notation we would now have:
 
 ```html
-<form class="site-search  site-search--full">
+<form class="site-search site-search--full">
     <input type="text" class="site-search__field">
     <input type="Submit" value ="Search" class="site-search__button">
 </form>
