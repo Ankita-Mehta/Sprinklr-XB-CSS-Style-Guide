@@ -8,6 +8,7 @@ Read more about it here: https://en.bem.info/
 
 #####Block
 A block is an independent entity, a “building block” of an application. A block can be either simple or compound (containing other blocks).
+
 Block names must be unique within a project to unequivocally designate which block is being described. Only instances of the same block can have the same names.
 
 A block name follows the block-name scheme and defines a namespace for elements and modifiers.
@@ -82,12 +83,14 @@ menu--hidden
 *CSS*
 
 ```css
-.menu--hidden { display: none }
+.menu--hidden { 
+    @include .hidden; /* Using Bootstrap */  
+}
 ```
 
 The naming convention follows this pattern:
 
-```
+```css
 .block {}
 .block__element {}
 .block--modifier {}
@@ -99,15 +102,15 @@ The naming convention follows this pattern:
 
 The reason for double rather than single hyphens and underscores is so that your block itself can be hyphen delimited, for example:
 
-```
+```css
 .site-search {} /* Block */
 .site-search__field {} /* Element */
 .site-search--full {} /* Modifier */
 ```
 
-By reading some HTML with some classes in, you can see how â€“ if at all â€“ the chunks are related; something might just be a component, something might be a child, or element, of that component, and something might be a variation or modifier of that component. To use an analogy/model, think how the following things and elements are related:
+By reading some HTML with some classes in, you can see how – if at all – the chunks are related; something might just be a component, something might be a child, or element, of that component, and something might be a variation or modifier of that component. To use an analogy/model, think how the following things and elements are related:
 
-```
+```css
 .person {}
 .person__hand {}
 .person--female {}
@@ -115,7 +118,7 @@ By reading some HTML with some classes in, you can see how â€“ if at all â
 .person__hand--left {}
 ```
 
-Taking the previous .site-search example again, with â€˜regularâ€™ naming:
+Taking the previous .site-search example again, with ‘regular’ naming:
 
 ```html
 <form class="site-search  full">
@@ -124,7 +127,7 @@ Taking the previous .site-search example again, with â€˜regularâ€™ nami
 </form>
 ```
 
-These classes are fairly loose, and donâ€™t tell us much. Even though we can work it out, theyâ€™re very inexplicit. With BEM notation we would now have:
+These classes are fairly loose, and don’t tell us much. Even though we can work it out, they’re very inexplicit. With BEM notation we would now have:
 
 ```html
 <form class="site-search  site-search--full">
@@ -240,9 +243,9 @@ Please do not abbreviate words like ```icon``` to ```icn```. Use abbreviation on
 
 1. `@extend` declarations
 
-    Just as in other OOP languages, it's helpful to know right away that this â€œclassâ€ inherits from another.
+    Just as in other OOP languages, it's helpful to know right away that this “class” inherits from another.
 
-    ```scss
+    ```css
     .btn-green {
         @extend %btn;
         // ...
@@ -253,7 +256,7 @@ Please do not abbreviate words like ```icon``` to ```icn```. Use abbreviation on
 
     Now list all standard property declarations, anything that isn't an `@extend`, `@include`, or a nested selector.
 
-    ```scss
+    ```css
     .btn-green {
         @extend %btn;
         background: green;
@@ -266,7 +269,7 @@ Please do not abbreviate words like ```icon``` to ```icn```. Use abbreviation on
 
     Grouping `@include`s at the end makes it easier to read the entire selector, and it also visually separates them from `@extend`s.
 
-    ```scss
+    ```css
     .btn-green {
         @extend %btn;
         background: green;
@@ -280,7 +283,7 @@ Please do not abbreviate words like ```icon``` to ```icn```. Use abbreviation on
 
     Nested selectors, _if necessary_, go last, and nothing goes after them. Add whitespace between your rule declarations and nested selectors, as well as between adjacent nested selectors. Apply the same guidelines as above to your nested selectors.
 
-    ```scss
+    ```css
     .btn {
         @extend %btn;
         background: green;
@@ -295,7 +298,7 @@ Please do not abbreviate words like ```icon``` to ```icn```. Use abbreviation on
 
     >Do not nest selectors more than three levels deep!
 
-    >```scss
+    >```css
     >.page-container {
     >    .content {
     >        .profile {
@@ -307,8 +310,8 @@ Please do not abbreviate words like ```icon``` to ```icn```. Use abbreviation on
 
     >When selectors become this long, you're likely writing CSS that is:
 
-    >* Strongly coupled to the HTML (fragile) *â€”ORâ€”*
-    >* Overly specific (powerful) *â€”ORâ€”*
+    >* Strongly coupled to the HTML (fragile) *—OR—*
+    >* Overly specific (powerful) *—OR—*
     >* Not reusable
 
 
@@ -320,11 +323,11 @@ Please do not abbreviate words like ```icon``` to ```icn```. Use abbreviation on
 
 ##### Mixins
 
-Mixins, defined via `@mixin` and called with `@include`, should be used sparingly and only when function arguments are necessary. A mixin without function arguments (i.e. `@mixin hide { display: none; }`) is better accomplished using a placeholder selector (see below) in order to prevent code duplication.
+Mixins, defined via `@mixin` and called with `@include`, should be used sparingly and only when function arguments are necessary. A mixin without function arguments (i.e. `@mixin hidden { display: none; }`) is better accomplished using a placeholder selector (see below) in order to prevent code duplication.
 
 ##### Placeholders
 
-Placeholders in Sass, defined via `%selector` and used with `@extend`, are a way of defining rule declarations that aren't automatically output in your compiled stylesheet. Instead, other selectors â€œinheritâ€ from the placeholder, and the relevant selectors are copied to the point in the stylesheet where the placeholder is defined. This is best illustrated with the example below.
+Placeholders in Sass, defined via `%selector` and used with `@extend`, are a way of defining rule declarations that aren't automatically output in your compiled stylesheet. Instead, other selectors “inherit” from the placeholder, and the relevant selectors are copied to the point in the stylesheet where the placeholder is defined. This is best illustrated with the example below.
 
 Placeholders are powerful but easy to abuse, especially when combined with nested selectors. **As a rule of thumb, avoid creating placeholders with nested rule declarations, or calling `@extend` inside nested selectors.** Placeholders are great for simple inheritance, but can easily result in the accidental creation of additional selectors without paying close attention to how and where they are used.
 
@@ -333,7 +336,7 @@ Placeholders are powerful but easy to abuse, especially when combined with neste
 ```sass
 // Unless we call `@extend %icon` these properties won't be compiled!
 %icon {
-    font-family: "Airglyphs";
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .icon-error {
