@@ -1,4 +1,4 @@
-#Sprinklr Style Guide
+#Sprinklr XB Style Guide
 
 ##Naming Conventions and Methodologies
 BEM stands for “Block”, “Element”, “Modifier”. It is a front-end methodology: a new way of thinking when developing Web interfaces.
